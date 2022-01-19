@@ -4,7 +4,11 @@
   "description": "Send out tokens from a wallet to a list of recipient wallets.",
   "main": "index.ts",
   "scripts": {
-    "test": "hardhat test"
+    "test": "hardhat test",
+    "fork:testnet": "npx hardhat node --fork $(dotenv -p MORALIS_BSC_TESTNET_ARCHIVE_URL) --fork-block-number $(dotenv -p MORALIS_BSC_TESTNET_BLOCK)",
+    "fork:mainnet": "npx hardhat node --fork $(dotenv -p MORALIS_BSC_MAINNET_ARCHIVE_URL) --fork-block-number $(dotenv -p MORALIS_BSC_MAINNET_BLOCK)",
+    "send:local": "npx hardhat run scripts/send.ts --network localhost",
+    "send:testnet": "npx hardhat run scripts/send.ts --network testnet"
   },
   "keywords": [
     "bot",
@@ -23,7 +27,7 @@
     "@typechain/hardhat": "^2.3.1",
     "@types/chai": "^4.3.0",
     "@types/mocha": "^9.0.0",
-    "@types/node": "^12.20.42",
+    "@types/node": "^16.11.7",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "chai": "^4.3.4",
@@ -46,5 +50,8 @@
     "ts-node": "^10.4.0",
     "typechain": "^5.2.0",
     "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "csv": "^6.0.5"
   }
 }
