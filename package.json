@@ -8,7 +8,8 @@
     "fork:testnet": "npx hardhat node --fork $(dotenv -p MORALIS_BSC_TESTNET_ARCHIVE_URL) --fork-block-number $(dotenv -p MORALIS_BSC_TESTNET_BLOCK)",
     "fork:mainnet": "npx hardhat node --fork $(dotenv -p MORALIS_BSC_MAINNET_ARCHIVE_URL) --fork-block-number $(dotenv -p MORALIS_BSC_MAINNET_BLOCK)",
     "send:local": "npx hardhat run scripts/send.ts --network localhost",
-    "send:testnet": "npx hardhat run scripts/send.ts --network testnet"
+    "send:testnet": "npx hardhat run scripts/send.ts --network testnet",
+    "send:mainnet": "npx hardhat run scripts/send.ts --network mainnet"
   },
   "keywords": [
     "bot",
