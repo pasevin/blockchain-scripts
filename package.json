@@ -7,6 +7,7 @@
     "test": "hardhat test",
     "fork:testnet": "npx hardhat node --fork $(dotenv -p MORALIS_BSC_TESTNET_ARCHIVE_URL) --fork-block-number $(dotenv -p MORALIS_BSC_TESTNET_BLOCK)",
     "fork:mainnet": "npx hardhat node --fork $(dotenv -p MORALIS_BSC_MAINNET_ARCHIVE_URL) --fork-block-number $(dotenv -p MORALIS_BSC_MAINNET_BLOCK)",
+    "validate": "npx hardhat run scripts/address-validator/validate.ts",
     "airdrop:local": "npx hardhat run scripts/airdrop/send.ts --network localhost",
     "airdrop:testnet": "npx hardhat run scripts/airdrop/send.ts --network testnet",
     "airdrop:mainnet": "npx hardhat run scripts/airdrop/send.ts --network mainnet"
