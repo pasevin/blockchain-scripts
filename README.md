@@ -1,6 +1,10 @@
-# ERC20 Token Sender Script
+# ERC20 Blockchain scripts, helpers and automation utils.
 
-A basic script to send ERC20 tokens from a specific wallet to a list of addresses.
+A collection of helpful utils and automation scripts for my own use with Hardhat.
+
+## Available scripts:
+
+- ERC20 token airdrop script.
 
 TODO:
 
