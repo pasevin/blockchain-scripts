@@ -1,9 +1,7 @@
-import { ethers, network } from "hardhat";
 import * as fs from "fs";
 import { parse } from "csv";
 import { isAddress } from "@ethersproject/address";
 import { pipeline } from "stream/promises";
-import { BigNumber, ContractReceipt, ContractTransaction } from "ethers";
 
 async function main() {
   // Path to the CSV files.
