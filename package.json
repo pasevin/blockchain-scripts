@@ -10,7 +10,10 @@
     "validate": "npx hardhat run scripts/address-validator/validate.ts",
     "airdrop:local": "npx hardhat run scripts/airdrop/send.ts --network localhost",
     "airdrop:testnet": "npx hardhat run scripts/airdrop/send.ts --network testnet",
-    "airdrop:mainnet": "npx hardhat run scripts/airdrop/send.ts --network mainnet"
+    "airdrop:mainnet": "npx hardhat run scripts/airdrop/send.ts --network mainnet",
+    "get-balances:local": "npx hardhat run scripts/get-balances/get-balances.ts --network localhost",
+    "get-balances:testnet": "npx hardhat run scripts/get-balances/get-balances.ts --network testnet",
+    "get-balances:mainnet": "npx hardhat run scripts/get-balances/get-balances.ts --network mainnet"
   },
   "keywords": [
     "bot",

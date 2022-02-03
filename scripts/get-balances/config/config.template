@@ -1,0 +1,23 @@
+# ---------------------------------------------------------------------------- #
+#               Config file template for the get balances script.              #
+# ---------------------------------------------------------------------------- #
+// Use this template to create your own config file.
+// Note: Don't commit your real config file!
+
+export const getBalancesConfig = {
+  localhost: {
+    tokenAddresses: [""],
+    tokenDecimals: [5],
+    tokenABIs: [[]],
+  },
+  testnet: {
+    tokenAddresses: [""],
+    tokenDecimals: [5],
+    tokenABIs: [[]],
+  },
+  mainnet: {
+    tokenAddresses: [""],
+    tokenDecimals: [5],
+    tokenABIs: [[]],
+  },
+};
