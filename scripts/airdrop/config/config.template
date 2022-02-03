@@ -1,0 +1,32 @@
+/* -------------------------------------------------------------------------- */
+/*                Config file template for the airdrop script.                */
+/* -------------------------------------------------------------------------- */
+// Use this template to create your own config file.
+// Note: Don't commit your real config file!
+
+export const airdropConfig = {
+  localhost: {
+    // Use amounts with token decimals.
+    maxLimitPerCycle: 2000000000,
+    minLimitToSend: 400000000,
+    tokenAddress: "",
+    tokenDecimals: 5,
+    tokenABI: [],
+  },
+  testnet: {
+    // Use amounts with token decimals.
+    maxLimitPerCycle: 2000000000,
+    minLimitToSend: 400000000,
+    tokenAddress: "",
+    tokenDecimals: 5,
+    tokenABI: [],
+  },
+  mainnet: {
+    // Use amounts with token decimals.
+    maxLimitPerCycle: 12000100000,
+    minLimitToSend: 400000000,
+    tokenAddress: "",
+    tokenDecimals: 5,
+    tokenABI: [],
+  },
+};

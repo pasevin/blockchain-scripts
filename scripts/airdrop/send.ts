@@ -1,10 +1,10 @@
 import { ethers, network } from "hardhat";
-import config from "../config";
 import * as fs from "fs";
 import { parse } from "csv";
 import { isAddress } from "@ethersproject/address";
 import { pipeline } from "stream/promises";
 import { BigNumber, ContractReceipt, ContractTransaction } from "ethers";
+import { airdropConfig } from "./config/config";
 
 async function main() {
   const [sender] = await ethers.getSigners();
@@ -14,14 +14,14 @@ async function main() {
     networkName === "testnet" ||
     networkName === "mainnet"
   ) {
-    const conf = config[networkName];
+    const conf = airdropConfig[networkName];
 
     /* -------------------------------------------------------------------------- */
     /*                                   GUARDS                                   */
     /* -------------------------------------------------------------------------- */
 
     // Check if the private key is set (see ethers.js signer).
-    if (!process.env.SENDER001_PRIVATE_KEY) {
+    if (!process.env.SIGNER_PRIVATE_KEY) {
       throw new Error("Missing private key (signer).");
     }
     // Check if the Dehub Lottery smart contract address is set.

@@ -15,8 +15,8 @@ const config: HardhatUserConfig = {
     localhost: {
       url: "http://127.0.0.1:8545",
       accounts:
-        process.env.SENDER001_PRIVATE_KEY !== undefined
-          ? [process.env.SENDER001_PRIVATE_KEY]
+        process.env.SIGNER_PRIVATE_KEY !== undefined
+          ? [process.env.SIGNER_PRIVATE_KEY]
           : [],
       forking: {
         url: process.env.MORALIS_BSC_MAINNET_ARCHIVE_URL || "",
@@ -28,8 +28,8 @@ const config: HardhatUserConfig = {
       chainId: 97,
       gasPrice: 20000000000,
       accounts:
-        process.env.SENDER001_PRIVATE_KEY !== undefined
-          ? [process.env.SENDER001_PRIVATE_KEY]
+        process.env.SIGNER_PRIVATE_KEY !== undefined
+          ? [process.env.SIGNER_PRIVATE_KEY]
           : [],
     },
     mainnet: {
@@ -37,8 +37,8 @@ const config: HardhatUserConfig = {
       chainId: 56,
       gasPrice: "auto",
       accounts:
-        process.env.SENDER001_PRIVATE_KEY !== undefined
-          ? [process.env.SENDER001_PRIVATE_KEY]
+        process.env.SIGNER_PRIVATE_KEY !== undefined
+          ? [process.env.SIGNER_PRIVATE_KEY]
           : [],
     },
     hardhat: {
