@@ -35,7 +35,7 @@ const config: HardhatUserConfig = {
     mainnet: {
       url: process.env.MORALIS_BSC_MAINNET_URL || "",
       chainId: 56,
-      gasPrice: 20000000000,
+      gasPrice: "auto",
       accounts:
         process.env.SENDER001_PRIVATE_KEY !== undefined
           ? [process.env.SENDER001_PRIVATE_KEY]
