@@ -48,7 +48,9 @@ async function main() {
     // Path to the CSV files.
     const readPath = __dirname + "/csv/input/recipients.csv";
     const now = new Date();
-    const timeStamp = `${now.getUTCFullYear()}-${now.getUTCMonth()}-${now.getUTCDate()}-${now.getUTCHours()}-${now.getUTCMinutes()}-${now.getUTCSeconds()}`;
+    const timeStamp = `${now.getUTCFullYear()}-${
+      now.getUTCMonth() + 1
+    }-${now.getUTCDate()}-${now.getUTCHours()}-${now.getUTCMinutes()}-${now.getUTCSeconds()}`;
     const writePathSent = `${__dirname}/csv/output/${timeStamp}_received.csv`;
     const writePathSkip = `${__dirname}/csv/output/${timeStamp}_skipped.csv`;
 
@@ -76,21 +78,30 @@ async function main() {
     for await (const record of parser) {
       const targetAddr = record[0];
       const amount = ethers.utils.parseUnits(record[1], conf.tokenDecimals);
+      const amountF = ethers.utils.formatUnits(amount, conf.tokenDecimals);
       const nextAccumulator = accumulator.add(amount);
       // Skip if the next transaction will reach the end of the cycle allowance.
       if (nextAccumulator.gte(conf.maxLimitPerCycle)) {
         if (!stoppedBefore) {
-          stoppedBefore = `Stopped before sending to ${targetAddr}, because the next transaction would exceed the cycle allowance. \nTotal would be: ${nextAccumulator.toString()}`;
+          stoppedBefore = `Stopped before sending to ${targetAddr}, because the next transaction would exceed the cycle allowance. \nTotal would be: ${ethers.utils
+            .formatUnits(nextAccumulator, conf.tokenDecimals)
+            .toString()}`;
         }
       } else {
         console.log("Processing: ", record);
         if (record.length == 2) {
           if (isAddress(targetAddr)) {
             if (amount.gte(conf.minLimitToSend)) {
-              console.log("Checking total sent: ", accumulator.toString());
+              console.log(
+                "Checking total sent: ",
+                ethers.utils.formatUnits(
+                  accumulator.toString(),
+                  conf.tokenDecimals
+                )
+              );
               // Can proceed with the transaction...
               try {
-                console.log("Sending: ", amount.toString(), " to ", targetAddr);
+                console.log("Sending: ", amountF, " to ", targetAddr);
                 let tx: ContractTransaction = await token
                   .connect(sender)
                   .transfer(targetAddr, amount);
@@ -98,27 +109,27 @@ async function main() {
                 // console.log("Receipt: ", receipt);
                 console.log((await token.balanceOf(targetAddr)).toString());
                 console.log("Successfully sent!");
-                writeSentStream.write(`${targetAddr},${amount.toString()}\n`);
+                writeSentStream.write(`${targetAddr},${amountF}\n`);
                 received.push(record);
                 accumulator = nextAccumulator;
               } catch (e) {
                 console.log("Failed to send: ", e);
-                writeSkipsStream.write(`${targetAddr},${amount.toString()}\n`);
+                writeSkipsStream.write(`${targetAddr},${amountF}\n`);
                 skipped.push(record);
               }
             } else {
               console.log(`Skip "${targetAddr}", amount too small: ${amount}`);
-              writeSkipsStream.write(`${targetAddr},${amount.toString()}\n`);
+              writeSkipsStream.write(`${targetAddr},${amountF}\n`);
               skipped.push(record);
             }
           } else {
             console.log("Skipping invalid address: ", targetAddr);
-            writeSkipsStream.write(`${targetAddr},${amount.toString()}\n`);
+            writeSkipsStream.write(`${targetAddr},${amountF}\n`);
             skipped.push(record);
           }
         } else {
           console.log("Skipping invalid record: ", record);
-          writeSkipsStream.write(`${targetAddr},${amount.toString()}\n`);
+          writeSkipsStream.write(`${targetAddr},${amountF}\n`);
           skipped.push(record);
         }
       }
